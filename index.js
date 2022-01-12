@@ -1,4 +1,4 @@
-import init, { add, subtract, multiply, divide } from './pkg/hello_wasm.js';
+import init, { add, subtract, multiply, divide, speed_test } from './pkg/hello_wasm.js';
 
 init().then(() => {
     // Add
@@ -35,5 +35,30 @@ init().then(() => {
         const difference = divide(a, b);
 
         document.getElementById('quotient').innerHTML = difference;
+    });
+
+    // JavaScript Speed Test
+    document.getElementById('jsTestBtn').addEventListener('click', () => {
+        let count = 0;
+
+        const start = performance.now();
+        while (count < 1000000000) {
+            count += 1;
+        }
+        const end = performance.now();
+
+        const ms = end - start;
+
+        document.getElementById('jsMS').innerHTML = `Done (${ms.toFixed(2)} ms)`;
+    });
+
+    // Rust Speed Test
+    document.getElementById('rustTestBtn').addEventListener('click', () => {
+        const start = performance.now();
+        speed_test();
+        const end = performance.now();
+        const ms = end - start;
+
+        document.getElementById('rustMS').innerHTML = `Done (${ms.toFixed(2)} ms)`;
     });
 });
