@@ -1,4 +1,4 @@
-import init, { add, subtract, multiply, divide, speed_test } from './pkg/hello_wasm.js';
+import init, { add, subtract, multiply, divide, speed_test } from './pkg/wasm_math.js';
 
 init().then(() => {
     // Add
